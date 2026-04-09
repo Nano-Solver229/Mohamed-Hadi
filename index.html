@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammed Hadi — NoClip Edition</title>
+  <meta name="description" content="Mohammed Hadi — Content Creator & Liminal Streamer. Enter the Backrooms." />
+  <meta name="keywords" content="Mohammed Hadi, content creator, streamer, Kick, YouTube, TikTok" />
+  <meta property="og:title" content="Mohammed Hadi — NoClip Edition" />
+  <meta property="og:description" content="Content Creator | Liminal Streamer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Creepster&family=Special+Elite&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --yellow-wall: #e6d5a8;
+      --yellow-light: #f5e8c7;
+      --yellow-deep: #c9b47a;
+      --yellow-dark: #8a7540;
+      --black: #0a0900;
+      --red-danger: #c0392b;
+      --red-soft: #8b2020;
+      --flicker-white: #fffde8;
+      --carpet-1: #b89a2e;
+      --carpet-2: #1a1500;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--yellow-wall);
+      font-family: 'Share Tech Mono', monospace;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* ── CARPET TEXTURE ── */
+    .carpet-bg {
+      background-color: #1a1400;
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(184,154,46,0.08) 4px, rgba(184,154,46,0.08) 8px),
+        repeating-linear-gradient(-45deg, transparent, transparent 4px, rgba(26,21,0,0.5) 4px, rgba(26,21,0,0.5) 8px),
+        repeating-linear-gradient(0deg, transparent, transparent 12px, rgba(184,154,46,0.04) 12px, rgba(184,154,46,0.04) 14px),
+        repeating-linear-gradient(90deg, transparent, transparent 12px, rgba(184,154,46,0.04) 12px, rgba(184,154,46,0.04) 14px);
+    }
+
+    /* ── SCANLINES OVERLAY ── */
+    .scanlines::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.18) 2px,
+        rgba(0,0,0,0.18) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── VHS NOISE ── */
+    .vhs-noise::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+      animation: vhsShift 0.1s steps(1) infinite;
+      opacity: 0.5;
+    }
+
+    @keyframes vhsShift {
+      0%   { transform: translateY(0px); opacity: 0.5; }
+      20%  { transform: translateY(-1px); opacity: 0.4; }
+      40%  { transform: translateY(1px); opacity: 0.55; }
+      60%  { transform: translateY(0px); opacity: 0.45; }
+      80%  { transform: translateY(-2px); opacity: 0.5; }
+      100% { transform: translateY(0px); opacity: 0.5; }
+    }
+
+    /* ── CHROMATIC ABERRATION ── */
+    .chroma {
+      text-shadow:
+        -2px 0 rgba(255,0,60,0.5),
+        2px 0 rgba(0,200,255,0.5);
+    }
+
+    /* ── GLITCH ANIMATION ── */
+    @keyframes glitch {
+      0%   { clip-path: inset(0 0 98% 0); transform: translate(-4px, 0); }
+      5%   { clip-path: inset(30% 0 50% 0); transform: translate(4px, 0); }
+      10%  { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 0); }
+      15%  { clip-path: inset(80% 0 5% 0); transform: translate(3px, 0); }
+      20%  { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+      100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+    }
+
+    @keyframes glitch2 {
+      0%   { clip-path: inset(40% 0 40% 0); transform: translate(3px, 0); color: #ff003c; }
+      5%   { clip-path: inset(70% 0 10% 0); transform: translate(-3px, 0); color: #00d4ff; }
+      10%  { clip-path: inset(10% 0 80% 0); transform: translate(2px, 0); color: var(--yellow-wall); }
+      100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+    }
+
+    .glitch-text {
+      position: relative;
+      display: inline-block;
+    }
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .glitch-text::before {
+      animation: glitch 3s infinite linear;
+      color: #ff003c;
+      opacity: 0;
+    }
+    .glitch-text::after {
+      animation: glitch2 3s infinite linear 0.1s;
+      color: #00d4ff;
+      opacity: 0;
+    }
+    .glitch-text:hover::before,
+    .glitch-text:hover::after { opacity: 1; }
+    .glitch-text:hover {
+      animation: glitch 0.3s infinite;
+    }
+
+    /* ── FLICKERING LIGHT ── */
+    @keyframes flicker {
+      0%,19%,21%,23%,25%,54%,56%,100% { opacity: 1; }
+      20%,22%,24%,55% { opacity: 0.4; }
+    }
+    @keyframes flickerFast {
+      0%,100% { opacity: 1; }
+      48%,52% { opacity: 0.7; }
+      50% { opacity: 0.3; }
+    }
+    .flicker { animation: flicker 6s infinite; }
+    .flicker-fast { animation: flickerFast 2s infinite; }
+
+    /* ── FLUORESCENT LIGHT BAR ── */
+    .light-bar {
+      height: 6px;
+      background: linear-gradient(90deg, transparent 0%, #f5e8c7 20%, #fffde8 50%, #f5e8c7 80%, transparent 100%);
+      box-shadow: 0 0 20px 8px rgba(245,232,199,0.6), 0 0 60px 20px rgba(245,232,199,0.2);
+    }
+
+    /* ── HERO BACKROOMS ── */
+    .hero-bg {
+      background-color: #2a2000;
+      background-image:
+        /* Floor perspective lines */
+        linear-gradient(to bottom, transparent 60%, rgba(184,154,46,0.15) 100%),
+        /* Wall ceiling lines - converging perspective */
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(184,154,46,0.06) 80px, rgba(184,154,46,0.06) 82px),
+        /* Yellow wall wash */
+        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(230,213,168,0.12) 0%, transparent 70%),
+        /* Dark corners vignette */
+        radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0,0,0,0.8) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Hallway walls via pseudo-element */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        /* Left wall shadow */
+        linear-gradient(to right, rgba(0,0,0,0.7) 0%, transparent 30%),
+        /* Right wall shadow */
+        linear-gradient(to left, rgba(0,0,0,0.7) 0%, transparent 30%),
+        /* Ceiling */
+        linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 20%),
+        /* Floor */
+        linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 25%);
+      pointer-events: none;
+    }
+
+    /* Infinite hallway rooms */
+    .hallway-room {
+      position: absolute;
+      border: 2px solid rgba(230,213,168,0.2);
+      background: transparent;
+      animation: infiniteHall 8s linear infinite;
+    }
+
+    @keyframes infiniteHall {
+      0%   { transform: scale(0.1); opacity: 0; }
+      20%  { opacity: 0.6; }
+      80%  { opacity: 0.3; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+    /* ── FLOATING ANIMATION ── */
+    @keyframes float {
+      0%,100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-12px) rotate(1deg); }
+      66% { transform: translateY(-6px) rotate(-1deg); }
+    }
+    .float { animation: float 5s ease-in-out infinite; }
+
+    @keyframes floatSlow {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    .float-slow { animation: floatSlow 8s ease-in-out infinite; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: rgba(10,9,0,0.85);
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid rgba(230,213,168,0.15);
+      box-shadow: 0 2px 30px rgba(230,213,168,0.05);
+    }
+
+    .nav-link {
+      color: var(--yellow-wall);
+      text-decoration: none;
+      font-family: 'VT323', monospace;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+      padding: 4px 8px;
+      border: 1px solid transparent;
+      position: relative;
+    }
+    .nav-link:hover {
+      color: var(--flicker-white);
+      border-color: rgba(230,213,168,0.3);
+      text-shadow: 0 0 10px rgba(245,232,199,0.8), -1px 0 rgba(255,0,60,0.5), 1px 0 rgba(0,200,255,0.5);
+      background: rgba(230,213,168,0.05);
+    }
+
+    /* ── PORTAL CARDS ── */
+    .portal-card {
+      background: rgba(20,16,0,0.9);
+      border: 1px solid rgba(230,213,168,0.2);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .portal-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(230,213,168,0.03) 0%, transparent 50%, rgba(230,213,168,0.03) 100%);
+      transition: all 0.3s;
+    }
+
+    /* Door frame effect */
+    .portal-card::after {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid rgba(230,213,168,0.08);
+      pointer-events: none;
+      transition: all 0.3s;
+    }
+
+    .portal-card:hover {
+      border-color: rgba(230,213,168,0.6);
+      box-shadow:
+        0 0 20px rgba(230,213,168,0.15),
+        0 0 60px rgba(230,213,168,0.05),
+        inset 0 0 30px rgba(230,213,168,0.03);
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    .portal-card:hover::after {
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border-color: rgba(230,213,168,0.2);
+    }
+
+    /* Platform color accents */
+    .portal-kick:hover    { border-color: rgba(83,252,30,0.5); box-shadow: 0 0 30px rgba(83,252,30,0.1); }
+    .portal-youtube:hover { border-color: rgba(255,0,0,0.5); box-shadow: 0 0 30px rgba(255,0,0,0.1); }
+    .portal-twitter:hover { border-color: rgba(29,161,242,0.5); box-shadow: 0 0 30px rgba(29,161,242,0.1); }
+    .portal-tiktok:hover  { border-color: rgba(255,0,80,0.5); box-shadow: 0 0 30px rgba(255,0,80,0.1); }
+    .portal-insta:hover    { border-color: rgba(225,48,108,0.5); box-shadow: 0 0 30px rgba(225,48,108,0.1); }
+    .portal-discord:hover  { border-color: rgba(88,101,242,0.5); box-shadow: 0 0 30px rgba(88,101,242,0.1); }
+    .portal-snapchat:hover { border-color: rgba(255,252,0,0.5); box-shadow: 0 0 30px rgba(255,252,0,0.1); }
+
+    /* Card glitch on hover */
+    .portal-card:hover .card-title {
+      text-shadow: -1px 0 rgba(255,0,60,0.7), 1px 0 rgba(0,200,255,0.7);
+      animation: glitchText 0.5s steps(2) infinite;
+    }
+
+    @keyframes glitchText {
+      0%   { transform: skewX(0deg); }
+      25%  { transform: skewX(-3deg); }
+      50%  { transform: skewX(3deg); }
+      75%  { transform: skewX(-1deg); }
+      100% { transform: skewX(0deg); }
+    }
+
+    /* Door opening */
+    .door-inner {
+      transition: transform 0.4s ease, filter 0.3s;
+      transform-origin: left center;
+    }
+    .portal-card:hover .door-inner {
+      transform: perspective(400px) rotateY(-25deg);
+      filter: brightness(1.3);
+    }
+
+    /* ── ABOUT PANEL ── */
+    .noclip-panel {
+      background: rgba(26,20,0,0.95);
+      border: 1px solid rgba(230,213,168,0.25);
+      border-left: 4px solid rgba(230,213,168,0.6);
+      position: relative;
+    }
+    .noclip-panel::before {
+      content: 'DOCUMENT #001 — RECOVERED';
+      position: absolute;
+      top: -10px; left: 12px;
+      font-family: 'VT323', monospace;
+      font-size: 0.75rem;
+      color: rgba(230,213,168,0.5);
+      background: rgba(10,9,0,1);
+      padding: 0 8px;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    .section-title {
+      font-family: 'VT323', monospace;
+      color: var(--yellow-wall);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    /* ── SCROLL WARNING ── */
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0; }
+    }
+    .blink { animation: blink 1.2s step-end infinite; }
+
+    /* ── CRT BORDER ── */
+    .crt-frame {
+      border: 2px solid rgba(230,213,168,0.2);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        inset 0 0 30px rgba(0,0,0,0.4),
+        0 0 20px rgba(230,213,168,0.08);
+      border-radius: 4px;
+    }
+
+    /* ── HERO TITLE ── */
+    .hero-title {
+      font-family: 'VT323', monospace;
+      font-size: clamp(3.5rem, 12vw, 9rem);
+      line-height: 0.9;
+      color: var(--yellow-wall);
+      text-shadow:
+        0 0 40px rgba(230,213,168,0.4),
+        0 0 80px rgba(230,213,168,0.15),
+        -3px 0 rgba(255,0,60,0.4),
+        3px 0 rgba(0,200,255,0.4);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ENTER BUTTON ── */
+    .enter-btn {
+      font-family: 'VT323', monospace;
+      font-size: 1.4rem;
+      color: var(--black);
+      background: var(--yellow-wall);
+      border: none;
+      padding: 12px 36px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .enter-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 48%, rgba(255,255,255,0.1) 50%, transparent 52%);
+    }
+    .enter-btn:hover {
+      background: var(--flicker-white);
+      box-shadow: 0 0 20px rgba(245,232,199,0.5), 0 0 60px rgba(245,232,199,0.2);
+      transform: scale(1.03);
+      text-shadow: -1px 0 rgba(255,0,60,0.5), 1px 0 rgba(0,200,255,0.5);
+    }
+    .enter-btn:active { transform: scale(0.98); }
+
+    /* ── FOOTER ── */
+    .footer-bar {
+      background-color: #0f0c00;
+      border-top: 1px solid rgba(230,213,168,0.15);
+    }
+
+    /* ── SOCIAL ICON ── */
+    .social-icon-sm {
+      width: 28px; height: 28px;
+      opacity: 0.5;
+      transition: opacity 0.2s, filter 0.2s;
+      filter: sepia(1) hue-rotate(-10deg);
+    }
+    .social-icon-sm:hover {
+      opacity: 1;
+      filter: sepia(1) hue-rotate(-10deg) brightness(1.4);
+    }
+
+    /* ── LEVEL BADGE ── */
+    .level-badge {
+      font-family: 'VT323', monospace;
+      font-size: 0.7rem;
+      color: rgba(230,213,168,0.4);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ── STATIC EFFECT ON LOAD ── */
+    @keyframes staticFade {
+      0%   { opacity: 1; }
+      100% { opacity: 0; pointer-events: none; }
+    }
+    .static-intro {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.9) 1px,
+        rgba(230,213,168,0.03) 1px,
+        rgba(230,213,168,0.03) 2px
+      );
+      z-index: 99999;
+      animation: staticFade 1.2s ease-out 0.5s forwards;
+      pointer-events: none;
+    }
+
+    /* ── AMBIENT PARTICLES ── */
+    .dust {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(230,213,168,0.4);
+      animation: dustFloat linear infinite;
+    }
+    @keyframes dustFloat {
+      0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-20px) translateX(30px); opacity: 0; }
+    }
+
+    /* ── ICON SVGS ── */
+    .platform-icon {
+      width: 40px; height: 40px;
+      transition: filter 0.3s, transform 0.3s;
+      filter: sepia(0.5) brightness(0.8);
+    }
+    .portal-card:hover .platform-icon {
+      filter: sepia(0) brightness(1.2);
+      transform: scale(1.1);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .hero-title { font-size: clamp(2.8rem, 15vw, 5rem); }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: rgba(230,213,168,0.3); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(230,213,168,0.6); }
+
+    /* ── NOISE TEXTURE ── */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9997;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body class="scanlines vhs-noise carpet-bg">
+
+  <!-- Static Intro Overlay -->
+  <div class="static-intro"></div>
+  <div class="noise-overlay"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <nav class="navbar fixed top-0 left-0 right-0 z-50 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="#home" class="glitch-text chroma" data-text="MOHAMMED HADI"
+         style="font-family:'VT323',monospace; font-size:1.5rem; letter-spacing:0.08em; color:var(--yellow-wall); text-decoration:none;">
+        MOHAMMED HADI
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-1">
+        <a href="#home"    class="nav-link">LEVEL 0</a>
+        <span style="color:rgba(230,213,168,0.2); font-size:0.8rem;">|</span>
+        <a href="#about"   class="nav-link">LEVEL 1</a>
+        <span style="color:rgba(230,213,168,0.2); font-size:0.8rem;">|</span>
+        <a href="#portals" class="nav-link">LEVEL 2</a>
+        <span style="color:rgba(230,213,168,0.2); font-size:0.8rem;">|</span>
+        <a href="#footer"  class="nav-link">EXIT</a>
+      </div>
+
+      <!-- Mobile Nav -->
+      <div class="flex md:hidden items-center gap-2">
+        <a href="#about"   class="nav-link" style="font-size:0.85rem;">L1</a>
+        <a href="#portals" class="nav-link" style="font-size:0.85rem;">L2</a>
+      </div>
+    </div>
+
+    <!-- Light bar under nav -->
+    <div class="light-bar mt-3 flicker-fast" style="margin-left:-1rem; margin-right:-1rem;"></div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════════ -->
+  <section id="home" class="hero-bg relative min-h-screen flex flex-col items-center justify-center pt-20 pb-16 overflow-hidden">
+
+    <!-- Hallway rooms (depth illusion) -->
+    <div class="hallway-room" style="width:80vw;height:80vh;top:10vh;left:10vw; animation-delay:0s;"></div>
+    <div class="hallway-room" style="width:60vw;height:60vh;top:20vh;left:20vw; animation-delay:2s;"></div>
+    <div class="hallway-room" style="width:40vw;height:40vh;top:30vh;left:30vw; animation-delay:4s;"></div>
+    <div class="hallway-room" style="width:20vw;height:20vh;top:40vh;left:40vw; animation-delay:6s;"></div>
+
+    <!-- Ceiling light -->
+    <div class="absolute top-16 left-1/2 -translate-x-1/2 w-48 flicker"
+         style="height:4px; background:linear-gradient(90deg,transparent,rgba(245,232,199,0.9),transparent); box-shadow:0 0 30px 10px rgba(245,232,199,0.3), 0 0 80px 30px rgba(245,232,199,0.1);">
+    </div>
+    <!-- Second light -->
+    <div class="absolute top-16 left-1/4 w-32 flicker"
+         style="height:3px; background:linear-gradient(90deg,transparent,rgba(245,232,199,0.6),transparent); box-shadow:0 0 20px 8px rgba(245,232,199,0.2); animation-delay:0.5s;">
+    </div>
+
+    <!-- Dust particles -->
+    <div class="dust" style="width:2px;height:2px;left:15%;animation-duration:12s;animation-delay:0s;"></div>
+    <div class="dust" style="width:1px;height:1px;left:35%;animation-duration:18s;animation-delay:3s;"></div>
+    <div class="dust" style="width:3px;height:3px;left:55%;animation-duration:10s;animation-delay:1s;"></div>
+    <div class="dust" style="width:2px;height:2px;left:72%;animation-duration:15s;animation-delay:5s;"></div>
+    <div class="dust" style="width:1px;height:1px;left:88%;animation-duration:20s;animation-delay:7s;"></div>
+
+    <!-- VHS timestamp -->
+    <div class="absolute top-24 left-6 text-xs flicker"
+         style="font-family:'VT323',monospace; color:rgba(230,213,168,0.5); letter-spacing:0.1em;">
+      REC ● 00:00:00&nbsp;&nbsp;LEVEL 0
+    </div>
+
+    <!-- Warning corners -->
+    <div class="absolute top-24 right-6 text-right">
+      <div class="blink" style="font-family:'VT323',monospace; color:var(--red-danger); font-size:0.85rem; letter-spacing:0.1em;">⚠ DO NOT LOOK BACK</div>
+      <div style="font-family:'VT323',monospace; color:rgba(230,213,168,0.3); font-size:0.7rem; margin-top:4px;">REALITY UNSTABLE</div>
+    </div>
+
+    <!-- Main content -->
+    <div class="relative z-10 text-center px-4">
+
+      <!-- Level indicator -->
+      <div class="level-badge mb-4 flicker">— LEVEL 0 : My world —</div>
+
+      <!-- Main title -->
+      <div class="float-slow mb-2">
+        <h1 class="hero-title glitch-text" data-text="MOHAMMED HADI">
+          MOHAMMED<br>HADI
+        </h1>
+      </div>
+
+      <!-- Subtitle -->
+      <p class="float mb-10 mt-4"
+         style="font-family:'VT323',monospace; font-size:clamp(1.1rem,3vw,1.6rem); color:rgba(230,213,168,0.7); letter-spacing:0.2em; text-transform:uppercase;">
+        Content Creator &nbsp;|&nbsp; Liminal Streamer
+      </p>
+
+      <!-- CTA Button -->
+      <a href="#portals" class="enter-btn">
+        ▶ Let it begun
+      </a>
+
+      <!-- Scroll hint -->
+      <div class="mt-12 blink" style="font-family:'VT323',monospace; color:rgba(230,213,168,0.35); font-size:0.9rem; letter-spacing:0.15em;">
+        ↓ KEEP WALKING ↓
+      </div>
+    </div>
+
+    <!-- Bottom vignette -->
+    <div class="absolute bottom-0 left-0 right-0 h-32"
+         style="background:linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));"></div>
+  </section>
+
+
+  <!-- Light bar separator -->
+  <div class="light-bar flicker" style="opacity:0.6;"></div>
+
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT SECTION
+  ═══════════════════════════════════════════ -->
+  <section id="about" class="py-20 px-4" style="background:rgba(10,8,0,0.97);">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Section label -->
+      <div class="flex items-center gap-4 mb-10">
+        <div style="height:1px; flex:1; background:linear-gradient(to right, transparent, rgba(230,213,168,0.3));"></div>
+        <h2 class="section-title text-3xl md:text-4xl flicker glitch-text" data-text="// LEVEL 1 : NOCLIP ZONE //">
+          // LEVEL 1 : NOCLIP ZONE //
+        </h2>
+        <div style="height:1px; flex:1; background:linear-gradient(to left, transparent, rgba(230,213,168,0.3));"></div>
+      </div>
+
+      <!-- NoClip panel -->
+      <div class="noclip-panel p-8 md:p-10">
+
+        <!-- Header -->
+        <div class="flex items-start justify-between mb-6 flex-wrap gap-4">
+          <div>
+            <div style="font-family:'VT323',monospace; font-size:0.75rem; color:rgba(230,213,168,0.4); letter-spacing:0.15em; margin-bottom:4px;">
+              ENTITY IDENTIFICATION FILE
+            </div>
+            <div style="font-family:'VT323',monospace; font-size:2rem; color:var(--yellow-wall);">
+              Mohammed Hadi
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="blink" style="font-family:'VT323',monospace; color:var(--red-danger); font-size:0.8rem; letter-spacing:0.1em;">● ACTIVE ENTITY</div>
+            <div style="font-family:'VT323',monospace; color:rgba(230,213,168,0.35); font-size:0.65rem; margin-top:4px;">THREAT LEVEL: DREAMER</div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div style="height:1px; background:linear-gradient(to right, rgba(230,213,168,0.3), transparent); margin-bottom:24px;"></div>
+
+        <!-- Bio text -->
+        <div style="line-height:1.9; color:rgba(230,213,168,0.75); font-size:0.95rem;">
+          <p style="margin-bottom:16px;">
+            <span style="color:var(--yellow-wall); font-family:'VT323',monospace; font-size:1.1rem;">PROFILE:</span><br>
+            A wanderer discovered within the infinite corridors of Level 0. This entity has been observed creating content across multiple digital planes — streaming, recording, and broadcasting from somewhere deep inside the Backrooms.
+          </p>
+          <p style="margin-bottom:16px;">
+            <span style="color:var(--yellow-wall); font-family:'VT323',monospace; font-size:1.1rem;">BEHAVIOR:</span><br>
+            Known for liminal exploration, content creation, and streaming sessions that blur the line between reality and the dreaming spaces. Approach with curiosity. Do not look directly at the fluorescent lights.
+          </p>
+          <p>
+            <span style="color:var(--yellow-wall); font-family:'VT323',monospace; font-size:1.1rem;">STATUS:</span>
+            <span style="color:var(--yellow-deep); font-family:'VT323',monospace;"> Still NoClipping. Has not found the exit. Does not want to.</span>
+          </p>
+        </div>
+
+        <!-- Footer of panel -->
+        <div style="margin-top:24px; padding-top:16px; border-top:1px solid rgba(230,213,168,0.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:gap:8px;">
+          <span style="font-family:'VT323',monospace; font-size:0.7rem; color:rgba(230,213,168,0.3); letter-spacing:0.12em;">THE BACKROOMS RESEARCH DATABASE — 2026</span>
+          <span class="flicker-fast" style="font-family:'VT323',monospace; font-size:0.7rem; color:rgba(192,57,43,0.6); letter-spacing:0.1em;">CLASSIFIED</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PORTALS SECTION
+  ═══════════════════════════════════════════ -->
+  <section id="portals" class="py-20 px-4" style="background:rgba(8,6,0,0.99);">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Section title -->
+      <div class="text-center mb-4">
+        <div class="level-badge mb-3 flicker">— YOU ARE APPROACHING —</div>
+        <h2 class="section-title text-3xl md:text-5xl glitch-text" data-text="LEVEL 2 : FOUND CHANNELS"
+            style="display:inline-block;">
+          LEVEL 2 : FOUND CHANNELS
+        </h2>
+        <p class="mt-4" style="font-family:'Share Tech Mono',monospace; color:rgba(230,213,168,0.4); font-size:0.8rem; letter-spacing:0.15em; text-transform:uppercase;">
+          Eight portals detected ahead. Select carefully. There is no going back.
+        </p>
+      </div>
+
+      <!-- Warning bar -->
+      <div class="flex items-center justify-center gap-3 mb-12 mt-6">
+        <div style="height:1px; width:60px; background:rgba(192,57,43,0.4);"></div>
+        <span class="blink" style="font-family:'VT323',monospace; color:var(--red-danger); font-size:0.85rem; letter-spacing:0.15em;">⚠ PORTALS ACTIVE — HOVER TO OPEN ⚠</span>
+        <div style="height:1px; width:60px; background:rgba(192,57,43,0.4);"></div>
+      </div>
+
+      <!-- Portal Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- ── KICK ── -->
+        <a href="https://kick.com/Mohammed_hadi_2002" target="_blank" rel="noopener noreferrer"
+           class="portal-card portal-kick crt-frame block p-6 no-underline" style="text-decoration:none;">
+          <div class="door-inner">
+            <div class="flex items-center gap-4 mb-5">
+              <!-- Kick icon -->
+              <svg class="platform-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="6" fill="#53FC1E" opacity="0.15"/>
+                <path d="M12 8h6v13.5l10-13.5h8L24 22l12 18h-8L18 26v14h-6V8z" fill="#53FC1E"/>
+              </svg>
+              <div>
+                <div class="card-title" style="font-family:'VT323',monospace; font-size:1.6rem; color:var(--yellow-light);">KICK</div>
+                <div class="level-badge">PORTAL #001</div>
+              </div>
+            </div>
+            <div style="height:1px; background:rgba(83,252,30,0.15); margin-bottom:16px;"></div>
+            <p style="font-size:0.85rem; color:rgba(230,213,168,0.5); margin-bottom:12px; letter-spacing:0.05em;">LIVE STREAMING CHANNEL</p>
+            <div style="font-family:'VT323',monospace; font-size:1.1rem; color:rgba(83,252,30,0.8);">@Mohammed_hadi_2002</div>
+            <div class="mt-4 flex items-center gap-2" style="font-family:'VT323',monospace; font-size:0.8rem; color:rgba(230,213,168,0.3); letter-spacing:0.1em;">
+              <span class="blink" style="color:rgba(83,252,30,0.6);">●</span> OPEN PORTAL →
+            </div>
+          </div>
+        </a>
+
+        <!-- ── YOUTUBE ── -->
+        <a href="https://youtube.com/@mohammed_hadi_2000" target="_blank" rel="noopener noreferrer"
+           class="portal-card portal-youtube crt-frame block p-6 no-underline" style="text-decoration:none;">
+          <div class="door-inner">
+            <div class="flex items-center gap-4 mb-5">
+              <svg class="platform-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="6" fill="#FF0000" opacity="0.15"/>
+                <path d="M24 10c0 0-12.5 0-15.6 0.8A5 5 0 0 0 4.8 14.4C4 17.5 4 24 4 24s0 6.5 0.8 9.6a5 5 0 0 0 3.6 3.6C11.5 38 24 38 24 38s12.5 0 15.6-0.8a5 5 0 0 0 3.6-3.6C44 30.5 44 24 44 24s0-6.5-0.8-9.6a5 5 0 0 0-3.6-3.6C36.5 10 24 10 24 10zm-4 9l10 5-10 5V19z" fill="#FF0000"/>
+              </svg>
+              <div>
+                <div class="card-title" style="font-family:'VT323',monospace; font-size:1.6rem; color:var(--yellow-light);">YOUTUBE</div>
+                <div class="level-badge">PORTAL #002</div>
+              </div>
+            </div>
+            <div style="height:1px; background:rgba(255,0,0,0.15); margin-bottom:16px;"></div>
+            <p style="font-size:0.85rem; color:rgba(230,213,168,0.5); margin-bottom:12px; letter-spacing:0.05em;">VIDEO BROADCAST CHANNEL</p>
+            <div style="font-family:'VT323',monospace; font-size:1.1rem; color:rgba(255,80,80,0.8);">@mohammed_hadi_2000</div>
+            <div class="mt-4 flex items-center gap-2" style="font-family:'VT323',monospace; font-size:0.8rem; color:rgba(230,213,168,0.3); letter-spacing:0.1em;">
+              <span style="color:rgba(255,0,0,0.6);">●</span> OPEN PORTAL →
+            </div>
+          </div>
+        </a>
+
+        <!-- ── X / TWITTER ── -->
+        <a href="https://x.com/mohammed_h3891" target="_blank" rel="noopener noreferrer"
+           class="portal-card portal-twitter crt-frame block p-6 no-underline" style="text-decoration:none;">
+          <div class="door-inner">
+            <div class="flex items-center gap-4 mb-5">
+              <svg class="platform-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="6" fill="#1DA1F2" opacity="0.12"/>
+                <path d="M8 8L20 25.2 8 40h4.5l9.3-10.7L30.5 40H40L27.4 22.1 39 8h-4.5l-8.5 9.8L17.5 8H8zm4 2.5h4l20 27H32L12 10.5z" fill="#E6D5A8"/>
+              </svg>
+              <div>
+                <div class="card-title" style="font-family:'VT323',monospace; font-size:1.6rem; color:var(--yellow-light);">X / TWITTER</div>
+                <div class="level-badge">PORTAL #003</div>
+              </div>
+            </div>
+            <div style="height:1px; background:rgba(29,161,242,0.15); margin-bottom:16px;"></div>
+            <p style="font-size:0.85rem; color:rgba(230,213,168,0.5); margin-bottom:12px; letter-spacing:0.05em;">SIGNAL BROADCAST TERMINAL</p>
+            <div style="font-family:'VT323',monospace; font-size:1.1rem; color:rgba(130,190,230,0.8);">@mohammed_h3891</div>
+            <div class="mt-4 flex items-center gap-2" style="font-family:'VT323',monospace; font-size:0.8rem; color:rgba(230,213,168,0.3); letter-spacing:0.1em;">
+              <span style="color:rgba(29,161,242,0.6);">●</span> OPEN PORTAL →
+            </div>
+          </div>
+        </a>
+
+        <!-- ── TIKTOK ── -->
+        <a href="https://www.tiktok.com/@mohammed_hadi_2000" target="_blank" rel="noopener noreferrer"
+           class="portal-card portal-tiktok crt-frame block p-6 no-underline" style="text-decoration:none;">
+          <div class="door-inner">
+            <div class="flex items-center gap-4 mb-5">
+              <svg class="platform-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="6" fill="#FF0050" opacity="0.12"/>
+                <path d="M34 6v2c0 5 4 9 9 9v4c-3 0-5.5-1-7.5-2.5V30c0 7.7-6.3 14-14 14s-14-6.3-14-14 6.3-14 14-14c1 0 2 .1 3 .3v4.3c-1-.3-2-.5-3-.5-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V6h2.5z" fill="#E6D5A8"/>
+                <path d="M32 6h2.5c0 0 .5 4.5 4 8-2 0-6.5-3-6.5-8z" fill="#00F2EA" opacity="0.7"/>
+              </svg>
+              <div>
+                <div class="card-title" style="font-family:'VT323',monospace; font-size:1.6rem; color:var(--yellow-light);">TIKTOK</div>
+                <div class="level-badge">PORTAL #004</div>
+              </div>
+            </div>
+            <div style="height:1px; background:rgba(255,0,80,0.15); margin-bottom:16px;"></div>
+            <p style="font-size:0.85rem; color:rgba(230,213,168,0.5); margin-bottom:12px; letter-spacing:0.05em;">SHORT-FORM TRANSMISSION</p>
+            <div style="font-family:'VT323',monospace; font-size:1.1rem; color:rgba(255,100,140,0.8);">@mohammed_hadi_2000</div>
+            <div class="mt-4 flex items-center gap-2" style="font-family:'VT323',monospace; font-size:0.8rem; color:rgba(230,213,168,0.3); letter-spacing:0.1em;">
+              <span style="color:rgba(255,0,80,0.6);">●</span> OPEN PORTAL →
+            </div>
+          </div>
+        </a>
+
+        <!-- ── INSTAGRAM 1 ── -->
+        <a href="https://www.instagram.com/mohammed_hadi_2000" target="_blank" rel="noopener noreferrer"
+           class="portal-card portal-insta crt-frame block p-6 no-underline" style="text-decoration:none;">
+          <div class="door-inner">
+            <div class="flex items-center gap-4 mb-5">
+              <svg class="platform-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="6" fill="#E1306C" opacity="0.12"/>
+                <rect x="8" y="8" width="32" height="32" rx="9" stroke="#E6D5A8" stroke-width="2.5" fill="none"/>
+                <circle cx="24" cy="24" r="8" stroke="#E6D5A8" stroke-width="2.5" fill="none"/>
+                <circle cx="34" cy="14" r="2" fill="#E6D5A8"/>
+              </svg>
+              <div>
+                <div class="card-title" style="font-family:'VT323',monospace; font-size:1.6rem; color:var(--yellow-light);">INSTAGRAM</div>
+                <div class="level-badge">PORTAL #005</div>
+              </div>
+            </div>
+            <div style="height:1px; background:rgba(225,48,108,0.15); margin-bottom:16px;"></div>
+            <p style="font-size:0.85rem; color:rgba(230,213,168,0.5); margin-bottom:12px; letter-spacing:0.05em;">VISUAL ARCHIVE — MAIN</p>
+            <div style="font-family:'VT323',monospace; font-size:1.1rem; color:rgba(225,120,160,0.8);">@mohammed_hadi_2000</div>
+            <div class="mt-4 flex items-center gap-2" style="font-family:'VT323',monospace; font-size:0.8rem; color:rgba(230,213,168,0.3); letter-spacing:0.1em;">
+              <span style="color:rgba(225,48,108,0.6);">●</span> OPEN PORTAL →
+            </div>
+          </div>
+        </a>
+
+        <!-- ── INSTAGRAM 2 ── -->
+        <a href="https://www.instagram.com/mohammed_hadi_2002" target="_blank" rel="noopener noreferrer"
+           class="portal-card portal-insta crt-frame block p-6 no-underline" style="text-decoration:none;">
+          <div class="door-inner">
+            <div class="flex items-center gap-4 mb-5">
+              <svg class="platform-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="6" fill="#C13584" opacity="0.12"/>
+                <rect x="8" y="8" width="32" height="32" rx="9" stroke="#E6D5A8" stroke-width="2.5" fill="none"/>
+                <circle cx="24" cy="24" r="8" stroke="#E6D5A8" stroke-width="2.5" fill="none"/>
+                <circle cx="34" cy="14" r="2" fill="#E6D5A8"/>
+              </svg>
+              <div>
+                <div class="card-title" style="font-family:'VT323',monospace; font-size:1.6rem; color:var(--yellow-light);">INSTAGRAM</div>
+                <div class="level-badge">PORTAL #006</div>
+              </div>
+            </div>
+            <div style="height:1px; background:rgba(193,53,132,0.15); margin-bottom:16px;"></div>
+            <p style="font-size:0.85rem; color:rgba(230,213,168,0.5); margin-bottom:12px; letter-spacing:0.05em;">VISUAL ARCHIVE — ALT</p>
+            <div style="font-family:'VT323',monospace; font-size:1.1rem; color:rgba(220,100,180,0.8);">@mohammed_hadi_2002</div>
+            <div class="mt-4 flex items-center gap-2" style="font-family:'VT323',monospace; font-size:0.8rem; color:rgba(230,213,168,0.3); letter-spacing:0.1em;">
+              <span style="color:rgba(193,53,132,0.6);">●</span> OPEN PORTAL →
+            </div>
+          </div>
+        </a>
+
+        <!-- ── DISCORD ── -->
+        <a href="https://discord.gg/acQGRZhDD" target="_blank" rel="noopener noreferrer"
+           class="portal-card portal-discord crt-frame block p-6 no-underline" style="text-decoration:none;">
+          <div class="door-inner">
+            <div class="flex items-center gap-4 mb-5">
+              <svg class="platform-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="6" fill="#5865F2" opacity="0.15"/>
+                <path d="M34.5 11A30 30 0 0 0 27.2 9a20 20 0 0 0-.9 1.8 27.7 27.7 0 0 0-8.6 0A19.4 19.4 0 0 0 16.8 9a30 30 0 0 0-7.3 2C6.1 18.2 5.2 25.2 5.6 32.1A31 31 0 0 0 14.9 37a22.5 22.5 0 0 0 1.9-3.1 19.6 19.6 0 0 1-3-1.4l.7-.6c5.8 2.7 12.1 2.7 17.8 0l.8.6a19.6 19.6 0 0 1-3 1.4 22.5 22.5 0 0 0 1.9 3.1 30.9 30.9 0 0 0 9.3-4.9c.5-7.8-1.3-14.7-4.8-20.1zM17.7 28c-1.9 0-3.4-1.7-3.4-3.7s1.5-3.7 3.4-3.7 3.4 1.7 3.4 3.7-1.5 3.7-3.4 3.7zm12.6 0c-1.9 0-3.4-1.7-3.4-3.7s1.5-3.7 3.4-3.7 3.4 1.7 3.4 3.7-1.5 3.7-3.4 3.7z" fill="#5865F2"/>
+              </svg>
+              <div>
+                <div class="card-title" style="font-family:'VT323',monospace; font-size:1.6rem; color:var(--yellow-light);">DISCORD</div>
+                <div class="level-badge">PORTAL #007</div>
+              </div>
+            </div>
+            <div style="height:1px; background:rgba(88,101,242,0.15); margin-bottom:16px;"></div>
+            <p style="font-size:0.85rem; color:rgba(230,213,168,0.5); margin-bottom:12px; letter-spacing:0.05em;">COMMUNITY HUB — VOICE &amp; TEXT</p>
+            <div style="font-family:'VT323',monospace; font-size:1.1rem; color:rgba(130,140,255,0.8);">discord.gg/acQGRZhDD</div>
+            <div class="mt-4 flex items-center gap-2" style="font-family:'VT323',monospace; font-size:0.8rem; color:rgba(230,213,168,0.3); letter-spacing:0.1em;">
+              <span style="color:rgba(88,101,242,0.6);">●</span> OPEN PORTAL →
+            </div>
+          </div>
+        </a>
+
+        <!-- ── SNAPCHAT ── -->
+        <a href="https://www.snapchat.com/add/mohammedhad2013?share_id=MgwsCeu4dEE&locale=ar-MA" target="_blank" rel="noopener noreferrer"
+           class="portal-card portal-snapchat crt-frame block p-6 no-underline" style="text-decoration:none;">
+          <div class="door-inner">
+            <div class="flex items-center gap-4 mb-5">
+              <svg class="platform-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="6" fill="#FFFC00" opacity="0.15"/>
+                <path d="M24 6c-5.5 0-9 3.5-9 9v1.5c-.8.3-2.5.2-3 .2-.3 0-.5.2-.5.5 0 .5.4 1.2 2.2 1.7-.2.4-.6 1-1.3 1.4-.3.2-.4.6-.2.9.5 1 1.8 1.5 3.3 1.8-.2.4-.5.8-.9 1.1-.5.4-.5 1 .1 1.3 1 .5 2.5.7 4.1.8.7.8 1.6 1.3 2.7 1.5.1 0 .1 0 0 .1-.4.5-2.2.8-3.5.9-.4 0-.7.4-.6.8.4 1.2 2 1.6 3 1.8.1 0 .1.1 0 .2-.5.4-2.5 1-5.3.9-.5 0-.9.4-.8.9.1.5.6.8 1 .9 2 .3 3.8.9 4.8 2.7.3.5.9.6 1.4.3.4-.2.9-.3 1.4-.3.5 0 1 .1 1.4.3.5.3 1.1.2 1.4-.3 1-1.8 2.8-2.4 4.8-2.7.4-.1.9-.4 1-.9.1-.5-.3-.9-.8-.9-2.8.1-4.8-.5-5.3-.9-.1-.1-.1-.2 0-.2 1-.2 2.6-.6 3-1.8.1-.4-.2-.8-.6-.8-1.3-.1-3.1-.4-3.5-.9-.1-.1-.1-.1 0-.1 1.1-.2 2-.7 2.7-1.5 1.6-.1 3.1-.3 4.1-.8.6-.3.6-.9.1-1.3-.4-.3-.7-.7-.9-1.1 1.5-.3 2.8-.8 3.3-1.8.2-.3.1-.7-.2-.9-.7-.4-1.1-1-1.3-1.4 1.8-.5 2.2-1.2 2.2-1.7 0-.3-.2-.5-.5-.5-.5 0-2.2.1-3-.2V15c0-5.5-3.5-9-9-9z" fill="#FFFC00"/>
+              </svg>
+              <div>
+                <div class="card-title" style="font-family:'VT323',monospace; font-size:1.6rem; color:var(--yellow-light);">SNAPCHAT</div>
+                <div class="level-badge">PORTAL #008</div>
+              </div>
+            </div>
+            <div style="height:1px; background:rgba(255,252,0,0.15); margin-bottom:16px;"></div>
+            <p style="font-size:0.85rem; color:rgba(230,213,168,0.5); margin-bottom:12px; letter-spacing:0.05em;">EPHEMERAL TRANSMISSIONS</p>
+            <div style="font-family:'VT323',monospace; font-size:1.1rem; color:rgba(255,252,80,0.8);">@mohammedhad2013</div>
+            <div class="mt-4 flex items-center gap-2" style="font-family:'VT323',monospace; font-size:0.8rem; color:rgba(230,213,168,0.3); letter-spacing:0.1em;">
+              <span style="color:rgba(255,252,0,0.6);">●</span> OPEN PORTAL →
+            </div>
+          </div>
+        </a>
+
+      </div><!-- /grid -->
+
+      <!-- Bottom note -->
+      <div class="text-center mt-10">
+        <p style="font-family:'VT323',monospace; color:rgba(230,213,168,0.2); font-size:0.8rem; letter-spacing:0.15em;">
+          ALL PORTALS VERIFIED. ENTITY IS ACTIVE ACROSS ALL LEVELS.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer id="footer" class="footer-bar carpet-bg pt-10 pb-6 px-4">
+
+    <!-- Ceiling light bar -->
+    <div class="light-bar flicker mb-8" style="opacity:0.4;"></div>
+
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Logo + tagline -->
+      <div class="text-center mb-8">
+        <div class="glitch-text chroma" data-text="MOHAMMED HADI"
+             style="font-family:'VT323',monospace; font-size:2.5rem; color:var(--yellow-wall); display:inline-block;">
+          MOHAMMED HADI
+        </div>
+        <p style="font-family:'VT323',monospace; color:rgba(230,213,168,0.35); font-size:0.85rem; letter-spacing:0.2em; margin-top:4px;">
+          CONTENT CREATOR · LIMINAL STREAMER · LEVEL 0 DWELLER
+        </p>
+      </div>
+
+      <!-- Social icons -->
+      <div class="flex justify-center items-center gap-5 mb-8 flex-wrap">
+
+        <!-- Kick -->
+        <a href="https://kick.com/Mohammed_hadi_2002" target="_blank" rel="noopener noreferrer" title="Kick">
+          <svg class="social-icon-sm" viewBox="0 0 48 48" fill="none"><path d="M12 8h6v13.5l10-13.5h8L24 22l12 18h-8L18 26v14h-6V8z" fill="#53FC1E"/></svg>
+        </a>
+        <!-- YouTube -->
+        <a href="https://youtube.com/@mohammed_hadi_2000" target="_blank" rel="noopener noreferrer" title="YouTube">
+          <svg class="social-icon-sm" viewBox="0 0 48 48" fill="none"><path d="M24 10c0 0-12.5 0-15.6.8A5 5 0 0 0 4.8 14.4C4 17.5 4 24 4 24s0 6.5.8 9.6a5 5 0 0 0 3.6 3.6C11.5 38 24 38 24 38s12.5 0 15.6-.8a5 5 0 0 0 3.6-3.6C44 30.5 44 24 44 24s0-6.5-.8-9.6a5 5 0 0 0-3.6-3.6C36.5 10 24 10 24 10zm-4 9l10 5-10 5V19z" fill="#FF0000"/></svg>
+        </a>
+        <!-- X -->
+        <a href="https://x.com/mohammed_h3891" target="_blank" rel="noopener noreferrer" title="X / Twitter">
+          <svg class="social-icon-sm" viewBox="0 0 48 48" fill="none"><path d="M8 8L20 25.2 8 40h4.5l9.3-10.7L30.5 40H40L27.4 22.1 39 8h-4.5l-8.5 9.8L17.5 8H8zm4 2.5h4l20 27H32L12 10.5z" fill="#E6D5A8"/></svg>
+        </a>
+        <!-- TikTok -->
+        <a href="https://www.tiktok.com/@mohammed_hadi_2000" target="_blank" rel="noopener noreferrer" title="TikTok">
+          <svg class="social-icon-sm" viewBox="0 0 48 48" fill="none"><path d="M34 6v2c0 5 4 9 9 9v4c-3 0-5.5-1-7.5-2.5V30c0 7.7-6.3 14-14 14s-14-6.3-14-14 6.3-14 14-14c1 0 2 .1 3 .3v4.3c-1-.3-2-.5-3-.5-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10V6H34z" fill="#E6D5A8"/></svg>
+        </a>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/mohammed_hadi_2000" target="_blank" rel="noopener noreferrer" title="Instagram (main)">
+          <svg class="social-icon-sm" viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="9" stroke="#E6D5A8" stroke-width="2.5" fill="none"/><circle cx="24" cy="24" r="8" stroke="#E6D5A8" stroke-width="2.5" fill="none"/><circle cx="34" cy="14" r="2" fill="#E6D5A8"/></svg>
+        </a>
+        <!-- Instagram 2 -->
+        <a href="https://www.instagram.com/mohammed_hadi_2002" target="_blank" rel="noopener noreferrer" title="Instagram (alt)">
+          <svg class="social-icon-sm" viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="32" height="32" rx="9" stroke="#c09060" stroke-width="2.5" fill="none"/><circle cx="24" cy="24" r="8" stroke="#c09060" stroke-width="2.5" fill="none"/><circle cx="34" cy="14" r="2" fill="#c09060"/></svg>
+        </a>
+        <!-- Discord -->
+        <a href="https://discord.gg/acQGRZhDD" target="_blank" rel="noopener noreferrer" title="Discord">
+          <svg class="social-icon-sm" viewBox="0 0 48 48" fill="none"><path d="M34.5 11A30 30 0 0 0 27.2 9a20 20 0 0 0-.9 1.8 27.7 27.7 0 0 0-8.6 0A19.4 19.4 0 0 0 16.8 9a30 30 0 0 0-7.3 2C6.1 18.2 5.2 25.2 5.6 32.1A31 31 0 0 0 14.9 37a22.5 22.5 0 0 0 1.9-3.1 19.6 19.6 0 0 1-3-1.4l.7-.6c5.8 2.7 12.1 2.7 17.8 0l.8.6a19.6 19.6 0 0 1-3 1.4 22.5 22.5 0 0 0 1.9 3.1 30.9 30.9 0 0 0 9.3-4.9c.5-7.8-1.3-14.7-4.8-20.1zM17.7 28c-1.9 0-3.4-1.7-3.4-3.7s1.5-3.7 3.4-3.7 3.4 1.7 3.4 3.7-1.5 3.7-3.4 3.7zm12.6 0c-1.9 0-3.4-1.7-3.4-3.7s1.5-3.7 3.4-3.7 3.4 1.7 3.4 3.7-1.5 3.7-3.4 3.7z" fill="#5865F2"/></svg>
+        </a>
+        <!-- Snapchat -->
+        <a href="https://www.snapchat.com/add/mohammedhad2013?share_id=MgwsCeu4dEE&locale=ar-MA" target="_blank" rel="noopener noreferrer" title="Snapchat">
+          <svg class="social-icon-sm" viewBox="0 0 48 48" fill="none"><path d="M24 6c-5.5 0-9 3.5-9 9v1.5c-.8.3-2.5.2-3 .2-.3 0-.5.2-.5.5 0 .5.4 1.2 2.2 1.7-.2.4-.6 1-1.3 1.4-.3.2-.4.6-.2.9.5 1 1.8 1.5 3.3 1.8-.2.4-.5.8-.9 1.1-.5.4-.5 1 .1 1.3 1 .5 2.5.7 4.1.8.7.8 1.6 1.3 2.7 1.5.1 0 .1 0 0 .1-.4.5-2.2.8-3.5.9-.4 0-.7.4-.6.8.4 1.2 2 1.6 3 1.8.1 0 .1.1 0 .2-.5.4-2.5 1-5.3.9-.5 0-.9.4-.8.9.1.5.6.8 1 .9 2 .3 3.8.9 4.8 2.7.3.5.9.6 1.4.3.4-.2.9-.3 1.4-.3.5 0 1 .1 1.4.3.5.3 1.1.2 1.4-.3 1-1.8 2.8-2.4 4.8-2.7.4-.1.9-.4 1-.9.1-.5-.3-.9-.8-.9-2.8.1-4.8-.5-5.3-.9-.1-.1-.1-.2 0-.2 1-.2 2.6-.6 3-1.8.1-.4-.2-.8-.6-.8-1.3-.1-3.1-.4-3.5-.9-.1-.1-.1-.1 0-.1 1.1-.2 2-.7 2.7-1.5 1.6-.1 3.1-.3 4.1-.8.6-.3.6-.9.1-1.3-.4-.3-.7-.7-.9-1.1 1.5-.3 2.8-.8 3.3-1.8.2-.3.1-.7-.2-.9-.7-.4-1.1-1-1.3-1.4 1.8-.5 2.2-1.2 2.2-1.7 0-.3-.2-.5-.5-.5-.5 0-2.2.1-3-.2V15c0-5.5-3.5-9-9-9z" fill="#FFFC00"/></svg>
+        </a>
+
+      </div>
+
+      <!-- Divider -->
+      <div style="height:1px; background:linear-gradient(to right, transparent, rgba(230,213,168,0.2), transparent); margin-bottom:20px;"></div>
+
+      <!-- Copyright -->
+      <div class="text-center">
+        <p style="font-family:'VT323',monospace; color:rgba(230,213,168,0.3); font-size:0.85rem; letter-spacing:0.15em;">
+          © 2026 MOHAMMED HADI &nbsp;•&nbsp; NOCLIP EDITION
+        </p>
+        <p class="mt-2" style="font-family:'Share Tech Mono',monospace; color:rgba(230,213,168,0.15); font-size:0.65rem; letter-spacing:0.1em;">
+          IF YOU ARE READING THIS, YOU HAVE ALREADY NOCLIPPED.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       JS: Glitch interval + scroll animations
+  ═══════════════════════════════════════════ -->
+  <script>
+    // Random global glitch flash
+    function randomGlitch() {
+      const body = document.body;
+      const delay = Math.random() * 8000 + 2000;
+      setTimeout(() => {
+        body.style.filter = 'hue-rotate(15deg) brightness(1.05)';
+        setTimeout(() => {
+          body.style.filter = '';
+          body.style.transform = 'translateX(-2px)';
+          setTimeout(() => {
+            body.style.transform = 'translateX(2px)';
+            setTimeout(() => {
+              body.style.transform = '';
+              randomGlitch();
+            }, 50);
+          }, 50);
+        }, 80);
+      }, delay);
+    }
+    randomGlitch();
+
+    // Sporadic scanline skip
+    function scanlineJump() {
+      const el = document.querySelector('.scanlines');
+      if (!el) return;
+      const d = Math.random() * 10000 + 5000;
+      setTimeout(() => {
+        el.style.backgroundPosition = `0 ${Math.random() * 4 - 2}px`;
+        setTimeout(() => { el.style.backgroundPosition = ''; scanlineJump(); }, 100);
+      }, d);
+    }
+    scanlineJump();
+
+    // Fade-in cards on scroll
+    const cards = document.querySelectorAll('.portal-card');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          e.target.style.transition = `opacity 0.5s ${i * 0.08}s, transform 0.5s ${i * 0.08}s, border-color 0.3s, box-shadow 0.3s`;
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(c => {
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(20px)';
+      obs.observe(c);
+    });
+
+    // Add random static artifact lines to hero
+    function staticLine() {
+      const hero = document.querySelector('.hero-bg');
+      if (!hero) return;
+      const line = document.createElement('div');
+      line.style.cssText = `
+        position:absolute;
+        left:0; right:0;
+        top:${Math.random() * 100}%;
+        height:${Math.random() * 3 + 1}px;
+        background:rgba(230,213,168,${Math.random() * 0.3 + 0.05});
+        pointer-events:none;
+        z-index:5;
+        animation: fadeOut 0.3s forwards;
+      `;
+      const style = document.createElement('style');
+      style.textContent = '@keyframes fadeOut { to { opacity:0; } }';
+      document.head.appendChild(style);
+      hero.appendChild(line);
+      setTimeout(() => line.remove(), 400);
+      setTimeout(staticLine, Math.random() * 3000 + 500);
+    }
+    staticLine();
+  </script>
+
+</body>
+</html>
